@@ -1,0 +1,80 @@
+/* Elementos de esquadrias de alumínio para background */
+.esquadria-element {
+  position: absolute;
+  border: 1px solid rgba(220, 228, 230, 0.4);
+  z-index: 0;
+}
+
+.esquadria-corner {
+  position: absolute;
+  border-style: solid;
+  border-color: rgba(220, 228, 230, 0.4);
+  border-width: 0;
+  z-index: 0;
+}
+
+.esquadria-corner-tl {
+  border-left-width: 1px;
+  border-top-width: 1px;
+}
+
+.esquadria-corner-tr {
+  border-right-width: 1px;
+  border-top-width: 1px;
+}
+
+.esquadria-corner-bl {
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.esquadria-corner-br {
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.esquadria-grid {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  z-index: 0;
+}
+
+.esquadria-grid-item {
+  border: 1px solid rgba(220, 228, 230, 0.3);
+}
+
+.esquadria-line {
+  position: absolute;
+  background-color: rgba(220, 228, 230, 0.3);
+  z-index: 0;
+}
+
+.esquadria-horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+.esquadria-vertical {
+  width: 1px;
+  height: 100%;
+}
+
+/* Animações sutis para os elementos */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+/* Ajustes para responsividade */
+@media (max-width: 768px) {
+  .esquadria-element, .esquadria-corner, .esquadria-grid, .esquadria-line {
+    display: none;
+  }
+}
