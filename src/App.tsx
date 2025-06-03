@@ -13,7 +13,6 @@ import capaImage from './assets/images/capa.png';
 import criaRapidoLogo from './assets/images/logo-cria-rapido.png';import novaImagemBanner from './assets/images/nova-imagem-banner.jpg';
 import techImage2 from './assets/images/tech-image2.jpg';
 import techImage3 from './assets/images/tech-image3.jpg';
-import setaBaixo from './assets/images/seta-baixo.png';
 import logonovo2 from './assets/images/logo-novo2.png';
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
