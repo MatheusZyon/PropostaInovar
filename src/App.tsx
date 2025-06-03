@@ -292,7 +292,7 @@ function App() {
   transition={{ duration: 0.8 }}
 >
   <div className="flex items-center gap-4 mb-6">
-  <h2 className="text-2xl md:text-1xl font-bold">O Desafio da</h2>
+  <h2 className="text-2xl md:text-1xl font-bold">Desafio</h2>
     <img src={logonovo2} alt="Logo Inovar" className="w-[224px] md:w-[256px] lg:w-[288px] h-auto" />
   
   </div>
