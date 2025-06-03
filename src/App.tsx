@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import './esquadrias.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Chart from './components/Chart';
 import EsquadriaElements from './components/EsquadriaElements';
 
@@ -10,11 +10,11 @@ import EsquadriaElements from './components/EsquadriaElements';
 // Logos removidos conforme solicitado
 import capaImage from './assets/images/capa.png';
 
-// Import tech images
-import novaImagemBanner from './assets/images/nova-imagem-banner.jpg';
+import criaRapidoLogo from './assets/images/logo-cria-rapido.png';import novaImagemBanner from './assets/images/nova-imagem-banner.jpg';
 import techImage2 from './assets/images/tech-image2.jpg';
 import techImage3 from './assets/images/tech-image3.jpg';
-
+import setaBaixo from './assets/images/seta-baixo.png';
+import logonovo2 from './assets/images/logo-novo2.png';
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [scrollY, setScrollY] = useState(0);
@@ -61,9 +61,7 @@ function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logos removidos conforme solicitado */}
-          <div className="text-xl font-bold">
-            Proposta Comercial
-          </div>
+          
           
           {/* Mobile menu button */}
           <button 
@@ -80,7 +78,7 @@ function App() {
           </button>
           
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             <a href="#hero" className={`nav-link ${activeSection === 'hero' ? 'text-[#8AB262] font-medium' : ''}`}>Início</a>
             <a href="#about" className={`nav-link ${activeSection === 'about' ? 'text-[#8AB262] font-medium' : ''}`}>Sobre</a>
             <a href="#challenge" className={`nav-link ${activeSection === 'challenge' ? 'text-[#8AB262] font-medium' : ''}`}>Desafio</a>
@@ -192,24 +190,34 @@ function App() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
+                  {/* About Section com fundo em faixa */}
+      <section id="about" className="py-20 bg-white relative overflow-hidden">
+        {/* Faixa de fundo sutil */}
+        <div className="absolute inset-x-0 top-0 h-1/2 bg-[#272733] z-0"></div>
+
+        {/* Container Principal da Seção Sobre - Garante que o conteúdo fique acima do fundo */}
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Conteúdo Centralizado (Logo e Texto) */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-16" // Espaçamento antes do grid de serviços
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Sobre a CRIA RÁPIDO</h2>
-            <div className="w-24 h-1 bg-[#8AB262] mx-auto mb-8"></div>
-            <p className="text-xl max-w-3xl mx-auto text-[#8C7B69]">
-              A CRIA RÁPIDO entrega mais que serviços. Oferecemos um ecossistema completo para acelerar negócios com tecnologia, conteúdo estratégico e performance.
-            </p>
+              {/* Logo CRIA RÁPIDO */}
+              <img
+                src={criaRapidoLogo}
+                alt="Logo CRIA RÁPIDO"
+                className="w-[200px] sm:w-[240px] md:w-[280px] lg:w-[320px] xl:w-[360px] mx-auto mb-4"
+              />
+              <p className="text-xl max-w-3xl mx-auto text-[#f0f3fa]">
+                A CRIA RÁPIDO entrega mais que serviços. Oferecemos um ecossistema completo para acelerar negócios com tecnologia, conteúdo estratégico e performance.
+              </p>
           </motion.div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* Grid de Serviços */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
               {
                 title: "Tráfego Pago",
@@ -235,7 +243,7 @@ function App() {
                 icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="2" x2="22" y1="7" y2="7"/><line x1="12" x2="12" y1="17" y2="17"/></svg>,
                 color: "#272733"
               }
-            ].map((service, index) => (
+            ].map((service, index ) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -244,7 +252,7 @@ function App() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-sm p-6 shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
               >
-                <div 
+                <div
                   className="w-16 h-16 rounded-sm flex items-center justify-center mb-4"
                   style={{ backgroundColor: `${service.color}10` }}
                 >
@@ -255,13 +263,14 @@ function App() {
               </motion.div>
             ))}
           </div>
-          
+
+          {/* Bloco Nossa Abordagem */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16 bg-[#F4F1E8] rounded-sm p-8 border-l-4 border-[#8AB262]"
+            className="bg-[#F4F1E8] rounded-sm p-8 border-l-4 border-[#8AB262]"
           >
             <h3 className="text-2xl font-bold mb-4">Nossa abordagem</h3>
             <p className="text-lg mb-6">
@@ -271,28 +280,35 @@ function App() {
         </div>
       </section>
 
+
+
       {/* Challenge Section */}
       <section id="challenge" className="py-20 bg-[#272733] text-white">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">O Desafio da Inovar</h2>
-              <div className="w-24 h-1 bg-[#8AB262] mb-8"></div>
-              <p className="text-xl mb-8">
-                A Inovar Esquadrias de Alumínio está em um momento estratégico de evolução, com uma nova identidade visual e um posicionamento renovado.
-              </p>
-              <p className="text-lg mb-6">
-                O desafio atual é traduzir essa evolução para o ambiente digital, fortalecendo a presença online, construindo autoridade no setor de esquadrias de alto padrão e ampliando o alcance de forma consistente e inteligente.
-              </p>
-              <p className="text-lg font-light italic">
-                É fundamental que a comunicação digital reflita a qualidade, sofisticação e inovação que a marca representa.
-              </p>
-            </motion.div>
+          <motion.div
+  initial={{ opacity: 0, x: -50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8 }}
+>
+  <div className="flex items-center gap-4 mb-6">
+  <h2 className="text-2xl md:text-1xl font-bold">O Desafio da</h2>
+    <img src={logonovo2} alt="Logo Inovar" className="w-[224px] md:w-[256px] lg:w-[288px] h-auto" />
+  
+  </div>
+  
+  <div className="w-24 h-1 bg-[#8AB262] mb-8"></div>
+  <p className="text-xl mb-8">
+    A Inovar Esquadrias de Alumínio está em um momento estratégico de evolução, com uma nova identidade visual e um posicionamento renovado.
+  </p>
+  <p className="text-lg mb-6">
+    O desafio atual é traduzir essa evolução para o ambiente digital, fortalecendo a presença online, construindo autoridade no setor de esquadrias de alto padrão e ampliando o alcance de forma consistente e inteligente.
+  </p>
+  <p className="text-lg font-light italic">
+    É fundamental que a comunicação digital reflita a qualidade, sofisticação e inovação que a marca representa.
+  </p>
+</motion.div>
             
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -348,14 +364,14 @@ function App() {
               },
               {
                 title: "Social Media Estratégico",
-                description: "5 posts por semana com design alinhado à identidade Inovar e textos estratégicos focados em autoridade.",
+                description: "Cinco posts por semana com design alinhado à identidade Inovar e textos estratégicos focados em autoridade.",
                 price: "R$ 1.000",
                 icon: "📱",
                 color: "#BF6240"
               },
               {
                 title: "Film Maker + Edição",
-                description: "1 visita quinzenal para captação e vídeos editados e otimizados para redes sociais.",
+                description: "Captação quinzenal com edição estratégica voltada à performance nas redes sociais e campanhas.",
                 price: "R$ 1.100",
                 icon: "🎬",
                 color: "#8C7B69"
@@ -575,9 +591,7 @@ function App() {
                 <p className="text-lg mb-2"><strong>Matheus</strong> — Especialista responsável</p>
                 <p className="text-[#8AB262]">CRIA RÁPIDO | Consultoria em Marketing e Performance</p>
               </div>
-              <a href="#" className="inline-block bg-[#8AB262] text-white px-8 py-3 rounded-sm hover:bg-[#7a9e55] transition-colors text-lg font-medium flex items-center">
-                Agendar Reunião <ArrowRight className="ml-2" />
-              </a>
+              
             </motion.div>
             
             <motion.div
@@ -593,7 +607,7 @@ function App() {
                 href="https://wa.me/5511985307758" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="bg-[#25D366] text-white px-8 py-4 rounded-sm hover:bg-[#128C7E] transition-colors flex items-center justify-center text-lg font-medium w-full md:w-auto"
+                className="bg-[#8AB262] text-white px-8 py-4 rounded-sm hover:bg-[#128C7E] transition-colors flex items-center justify-center text-lg font-medium w-full md:w-auto"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-3">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
